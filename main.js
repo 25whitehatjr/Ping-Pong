@@ -23,6 +23,30 @@ var ball = {
 
 function setup(){
   var canvas =  createCanvas(700,600);
+  canvas.parent("canvas")
+
+  video = createCapture(VIDEO);
+  video.size(600,500);
+  video.parent('game_console');
+
+  poseNet = ml5.poseNet(video, modelLoaded);
+	poseNet.on('pose', gotPoses);
+}
+
+function modelLoaded()
+{
+  console.log("Model is Loaded.")
+}
+
+function gotPoses(results)
+{
+	if(results.length > 0)
+	{
+		console.log(results);
+		noseX = results[0].pose.nose.x;
+		noseY = results[0].pose.nose.y;
+		console.log("noseX = " + noseX + ", noseY = " + noseY)
+	}
 }
 
 
