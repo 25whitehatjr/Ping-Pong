@@ -25,6 +25,8 @@ rightWristX = 0;
 rightWristY = 0;
 scoreRightWrist = 0;
 
+game_status = "";
+
 function setup(){
   var canvas =  createCanvas(700,600);
   canvas.parent("canvas")
@@ -55,8 +57,15 @@ function gotPoses(results)
 	}
 }
 
+function startGame()
+{
+  game_status = "start";
+  document.getElementById("status").innerHTML = "Game is Loaded.";
+}
 
 function draw(){
+if(game_status == "start"){
+
 
  background(0); 
 
@@ -101,7 +110,7 @@ function draw(){
    
    //function move call which in very important
     move();
-}
+}}
 
 
 
