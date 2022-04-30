@@ -21,6 +21,10 @@ var ball = {
     dy:3
 }
 
+rightWristX = 0;
+rightWristY = 0;
+scoreRightWrist = 0;
+
 function setup(){
   var canvas =  createCanvas(700,600);
   canvas.parent("canvas")
@@ -43,9 +47,11 @@ function gotPoses(results)
 	if(results.length > 0)
 	{
 		console.log(results);
-		noseX = results[0].pose.nose.x;
-		noseY = results[0].pose.nose.y;
-		console.log("noseX = " + noseX + ", noseY = " + noseY)
+		rightWristX = results[0].pose.rightWrist.x;
+		rightWristY = results[0].pose.rightWrist.y;
+    scoreRightWrist = results[0].pose.keypoints[10].score;
+    console.log(scoreRightWrist);
+		console.log("rightWristX = " + rightWristX + ", rightWristY = " + rightWristY)
 	}
 }
 
@@ -61,6 +67,12 @@ function draw(){
  fill("black");
  stroke("black");
  rect(0,0,20,700);
+
+ if(scoreRightWrist > 0.2){
+   fill("#ffff00");
+   stroke("#ffff00");
+   circle(rightWristX, rightWristY, 40);
+ }
  
    //funtion paddleInCanvas call 
    paddleInCanvas();
